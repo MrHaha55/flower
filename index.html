@@ -19,7 +19,7 @@
         <p class="text-sm text-gray-500 mt-1">ข้อมูลดึงสดจาก Google Sheets อัตโนมัติ</p>
     </header>
 
-    <main class="max-w-4xl mx-auto w-full flex-1">
+    <main class="max-w-4xl mx-auto w-full flex-1 pb-16">
         <!-- กล่องแสดงรายการสินค้า -->
         <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <!-- สินค้าจะถูกดึงมาแสดงตรงนี้ -->
@@ -49,13 +49,12 @@
                         stock: Number(item["จำนวนในสต็อก (ชิ้น)"]) || 0
                     }));
                     
-                    // เรียกใช้งานฟังก์ชัน renderProducts ที่เคยแจ้งเตือนว่าหายไป
                     renderProducts();
                 })
                 .catch(error => console.error("Error fetching data:", error));
         }
 
-        // 2. ฟังก์ชันสร้างหน้าตา HTML สำหรับแสดงสินค้า (แก้ปัญหา Error renderProducts is not defined)
+        // 2. ฟังก์ชันสร้างหน้าตา HTML สำหรับแสดงสินค้า
         function renderProducts() {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = "";
@@ -78,6 +77,24 @@
                 grid.appendChild(card);
             });
         }
+    </script>
+
+    <!-- 📌 นำสคริปต์ Widget แชทบอท Animuz กลับมาวางตรงนี้ -->
+    <script defer
+      data-embed-id="2caac7ec-67b8-4c84-91b3-36255b1daef2"
+      data-open-on-load="off"
+      data-chat-fn-version="v3-1-streaming" 
+      data-header-bg-color="#50A0FF" data-header-text-color="#ffffff"
+      data-header-bg-pattern="plain"
+      data-button-color="#50A0FF"
+      data-no-sponsor="false"
+      data-position="bottom-right"
+      data-bar-style="off"
+      data-user-bg-color="#50A0FF"
+      data-show-copy-action="true"
+      data-show-suggest-action="true"
+      data-show-report-action="true"
+      src="https://cdn.jsdelivr.net/npm/@animuz/embed@0.2.9/dist/animuz-chat-widget.min.js">
     </script>
 </body>
 </html>
