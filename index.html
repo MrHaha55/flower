@@ -1,43 +1,14 @@
-<!-- ตัวอย่างโครงสร้าง HTML บนหน้าเว็บที่คุณต้องมี -->
-<div id="product-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px;">
-  <!-- รายการสินค้าจะถูกสร้างขึ้นมาแสดงตรงนี้อัตโนมัติ -->
-</div>
-
-<script>
-  const apiUrl = "https://script.google.com/macros/s/AKfycbzJyaJYcD_9arSPyXDH3ALQX68KnZINwiTYOu7rjK4WLmoc8Gwd75Ed_uYn0TdY9ZMW/exec";
-
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(products => {
-      console.log("ข้อมูลสินค้าจาก Google Sheets:", products);
-
-      // 1. หาตำแหน่งกล่องที่จะแสดงสินค้า
-      const container = document.getElementById('product-container');
-      container.innerHTML = ""; // ล้างข้อมูลเก่า (ถ้ามี)
-
-      // 2. วนลูปข้อมูลสินค้าทั้ง 20 รายการมาสร้างการ์ดแสดงผล
-      products.forEach(item => {
-        // ดึงชื่อคอลัมน์ให้ตรงกับใน Google Sheets ของคุณ
-        const name = item["ชื่อดอกไม้"] || "สินค้าไม่มีชื่อ";
-        const color = item["รายละเอียดสี"] || "-";
-        const price = item["ราคา (บาท)"] || 0;
-        const stock = item["จำนวนในสต็อก (ชิ้น)"] || 0;
-
-        // สร้างกล่องการ์ดสินค้าทีละชิ้น
-        const card = document.createElement('div');
-        card.style.cssText = "background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center;";
-        
-        card.innerHTML = `
-          <h3 style="margin: 0 0 10px 0; color: #333; font-size: 18px;">${name}</h3>
-          <p style="margin: 5px 0; color: #666; font-size: 14px;">สี: ${color}</p>
-          <p style="margin: 5px 0; color: #50A0FF; font-weight: bold; font-size: 16px;">ราคา: ${price} บาท</p>
-          <p style="margin: 5px 0 15px 0; color: #888; font-size: 12px;">คงเหลือ: ${stock} ชิ้น</p>
-          <button onclick="alert('สั่งซื้อ: ${name}')" style="background: #50A0FF; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;">เลือกซื้อ</button>
-        `;
-
-        // นำการ์ดไปใส่ไว้ในหน้าเว็บ
-        container.appendChild(card);
-      });
-    })
-    .catch(error => console.error("Error fetching data:", error));
-</script>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ร้านดอกไม้</title>
+</head>
+<body style="margin:0; padding:0; overflow:hidden;">
+    <!-- ดึงหน้าเว็บทั้งหมดมาจาก Google Apps Script โดยตรง -->
+    <iframe src="https://script.google.com/macros/s/ใส่ลิงก์เว็บแอปของคุณตรงนี้/exec" 
+            style="width:100vw; height:100vh; border:none;">
+    </iframe>
+</body>
+</html>
