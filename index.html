@@ -1,14 +1,27 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ร้านดอกไม้</title>
-</head>
-<body style="margin:0; padding:0; overflow:hidden;">
-    <!-- ดึงหน้าเว็บทั้งหมดมาจาก Google Apps Script โดยตรง -->
-    <iframe src="https://script.google.com/macros/s/AKfycbzJyaJYcD_9arSPyXDH3ALQX68KnZINwiTYOu7rjK4WLmoc8Gwd75Ed_uYn0TdY9ZMW/exec" 
-            style="width:100vw; height:100vh; border:none;">
-    </iframe>
-</body>
-</html>
+<script>
+    // ลิงก์ Web App ของคุณ (ลงท้ายด้วย /exec)
+    const apiUrl = "https://script.google.com/macros/s/AKfycbzJyaJYcD_9arSPyXDH3ALQX68KnZINwiTYOu7rjK4WLmoc8Gwd75Ed_uYn0TdY9ZMW/exec";
+
+    window.addEventListener('DOMContentLoaded', () => {
+        fetchSheetData();
+    });
+
+    function fetchSheetData() {
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // แปลงข้อมูลจาก Google Sheets มาใส่ในตัวแปร products ของเว็บ
+                products = data.map((item, idx) => ({
+                    id: idx + 1,
+                    name: item["ชื่อดอกไม้"] || "ดอกไม้",
+                    color: item["รายละเอียดสี"] || "-",
+                    price: Number(item["ราคา (บาท)"]) || 0,
+                    stock: Number(item["จำนวนในสต็อก (ชิ้น)"]) || 0
+                }));
+                
+                // สั่งให้เว็บาดหน้าจอแสดงสินค้าตามข้อมูลล่าสุด
+                renderProducts();
+            })
+            .catch(error => console.error("Error fetching data:", error));
+    }
+</script>
